@@ -52,6 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .neon-text {
   background: linear-gradient(90deg, #ff003c, #00d4ff);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
