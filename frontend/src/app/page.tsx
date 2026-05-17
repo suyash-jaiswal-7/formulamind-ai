@@ -1,23 +1,30 @@
 import DashboardShell from "@/components/layout/DashboardShell";
 
+import LapTimeChart from "@/components/charts/LapTimeChart";
+import TireDegradationChart from "@/components/charts/TireDegradationChart";
+import PodiumProbabilityChart from "@/components/charts/PodiumProbabilityChart";
+import RiskAssessmentPanel from "@/components/charts/RiskAssessmentPanel";
+
 export default function Home() {
   return (
     <DashboardShell>
       <div className="space-y-8">
+        {/* Header */}
         <header>
           <h1 className="neon-text text-4xl font-bold md:text-6xl">
             Race Control Center
           </h1>
           <p className="mt-4 max-w-3xl text-lg text-slate-300">
-            Real-time telemetry analysis, strategy recommendations,
-            and AI-powered race engineering insights.
+            Real-time telemetry analysis, predictive insights, and AI-powered
+            Formula 1 strategy recommendations.
           </p>
         </header>
 
+        {/* KPI Cards */}
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {[
             ["Current Lap", "40 / 78"],
-            ["Tire Health", "84%"],
+            ["Tire Health", "44%"],
             ["Podium Probability", "92%"],
             ["Pit Window", "Lap 47–50"],
           ].map(([label, value]) => (
@@ -28,6 +35,14 @@ export default function Home() {
               <p className="mt-4 text-3xl font-bold">{value}</p>
             </div>
           ))}
+        </div>
+
+        {/* Main Analytics Grid */}
+        <div className="grid gap-8 xl:grid-cols-2">
+          <LapTimeChart />
+          <TireDegradationChart />
+          <PodiumProbabilityChart />
+          <RiskAssessmentPanel />
         </div>
       </div>
     </DashboardShell>
