@@ -1,9 +1,10 @@
 import DashboardShell from "@/components/layout/DashboardShell";
-
+import StrategyCard from "@/components/strategy/StrategyCard";
 import LapTimeChart from "@/components/charts/LapTimeChart";
 import TireDegradationChart from "@/components/charts/TireDegradationChart";
 import PodiumProbabilityChart from "@/components/charts/PodiumProbabilityChart";
 import RiskAssessmentPanel from "@/components/charts/RiskAssessmentPanel";
+import { strategyRecommendation } from "@/data/strategy";
 
 export default function Home() {
   return (
@@ -36,6 +37,9 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {/* AI Strategy Recommendation */}
+        <StrategyCard strategy={strategyRecommendation} />
 
         {/* Main Analytics Grid */}
         <div className="grid gap-8 xl:grid-cols-2">
