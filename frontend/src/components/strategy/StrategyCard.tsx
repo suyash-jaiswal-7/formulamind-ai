@@ -1,85 +1,86 @@
 "use client";
-
+import { Brain, TrendingUp, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
-import { Brain, AlertTriangle, TrendingUp } from "lucide-react";
-import type { StrategyRecommendation } from "@/data/strategy";
+import { StrategyResponse } from "@/lib/api";
 
-type StrategyCardProps = {
-  strategy: StrategyRecommendation;
-};
+interface StrategyCardProps {
+  strategy: StrategyResponse;
+}
 
 export default function StrategyCard({ strategy }: StrategyCardProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
+    <motion.section
+      initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7 }}
-      className="glass-card p-8"
+      transition={{ duration: 0.6 }}
+      className="glass-card p-8 space-y-8"
     >
       {/* Header */}
-      <div className="mb-6 flex items-center gap-3">
-        <div className="rounded-2xl bg-white/5 p-3">
-          <Brain className="h-6 w-6 text-cyan-400" />
+      <div className="flex items-start gap-6">
+        <div className="rounded-2xl bg-cyan-500/10 p-5">
+          <Brain className="h-10 w-10 text-cyan-400" />
         </div>
 
         <div>
-          <h3 className="text-2xl font-semibold">AI Strategy Recommendation</h3>
-          <p className="text-sm text-slate-400">
+          <h2 className="neon-text text-3xl font-bold md:text-5xl">
+            AI Strategy Recommendation
+          </h2>
+          <p className="mt-2 text-xl text-slate-400">
             Powered by FormulaMind Intelligence
           </p>
         </div>
       </div>
 
-      {/* Recommendation */}
-      <div className="mb-6 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5">
-        <p className="mb-2 text-sm uppercase tracking-widest text-cyan-300">
+      {/* Recommended Action */}
+      <div className="rounded-3xl border border-cyan-500/30 bg-cyan-500/5 p-8">
+        <p className="text-sm uppercase tracking-[0.3em] text-cyan-400">
           Recommended Action
         </p>
-        <p className="text-3xl font-bold text-white">
+        <h3 className="mt-4 text-4xl font-bold md:text-6xl">
           {strategy.action}
-        </p>
+        </h3>
       </div>
 
-      {/* Confidence */}
-      <div className="mb-6">
-        <div className="mb-2 flex justify-between text-sm">
-          <span className="text-slate-300">Confidence Score</span>
-          <span className="font-semibold text-white">
+      {/* Confidence Score */}
+      <div>
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-xl">Confidence Score</span>
+          <span className="text-3xl font-bold">
             {strategy.confidence}%
           </span>
         </div>
 
-        <div className="h-3 overflow-hidden rounded-full bg-white/10">
-          <div
-            className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-purple-500"
-            style={{ width: `${strategy.confidence}%` }}
+        <div className="h-5 overflow-hidden rounded-full bg-slate-800">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: `${strategy.confidence}%` }}
+            transition={{ duration: 1.2 }}
+            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-400 to-fuchsia-500"
           />
         </div>
       </div>
 
       {/* Explanation */}
-      <div className="mb-6 rounded-2xl bg-white/5 p-5">
-        <div className="mb-3 flex items-center gap-2">
-          <TrendingUp className="h-5 w-5 text-cyan-400" />
-          <span className="font-semibold">Strategic Explanation</span>
+      <div className="glass-card p-8">
+        <div className="mb-6 flex items-center gap-3">
+          <TrendingUp className="h-8 w-8 text-cyan-400" />
+          <h4 className="text-2xl font-bold">Strategic Explanation</h4>
         </div>
-
-        <p className="leading-relaxed text-slate-300">
-          {strategy.explanation}
+        <p className="text-lg leading-10 text-slate-200">
+          {strategy.reasoning}
         </p>
       </div>
 
       {/* What-If Scenario */}
-      <div className="rounded-2xl bg-red-500/5 p-5">
-        <div className="mb-3 flex items-center gap-2">
-          <AlertTriangle className="h-5 w-5 text-red-400" />
-          <span className="font-semibold">What-If Scenario</span>
+      <div className="rounded-3xl border border-red-500/20 bg-red-500/5 p-8">
+        <div className="mb-6 flex items-center gap-3">
+          <AlertTriangle className="h-8 w-8 text-red-400" />
+          <h4 className="text-2xl font-bold">What-If Scenario</h4>
         </div>
-
-        <p className="text-slate-300">
-          {strategy.whatIf}
+        <p className="text-lg leading-10 text-slate-200">
+          {strategy.what_if}
         </p>
       </div>
-    </motion.div>
+    </motion.section>
   );
 }

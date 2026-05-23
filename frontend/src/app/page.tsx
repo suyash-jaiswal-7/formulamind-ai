@@ -5,8 +5,10 @@ import TireDegradationChart from "@/components/charts/TireDegradationChart";
 import PodiumProbabilityChart from "@/components/charts/PodiumProbabilityChart";
 import RiskAssessmentPanel from "@/components/charts/RiskAssessmentPanel";
 import { strategyRecommendation } from "@/data/strategy";
+import { fetchStrategy } from "@/lib/api";
 
-export default function Home() {
+export default async function Home() {
+  const strategy = await fetchStrategy();
   return (
     <DashboardShell>
       <div className="space-y-8">
@@ -39,7 +41,7 @@ export default function Home() {
         </div>
 
         {/* AI Strategy Recommendation */}
-        <StrategyCard strategy={strategyRecommendation} />
+        <StrategyCard strategy={strategy} />
 
         {/* Main Analytics Grid */}
         <div className="grid gap-8 xl:grid-cols-2">
